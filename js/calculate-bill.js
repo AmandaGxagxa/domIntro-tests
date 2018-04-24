@@ -18,30 +18,27 @@ function calculateBill(billString){
 return billTotal.toFixed(2);
 }
 
+  var calculateBtnElement = document.querySelector(".calculateBtn");
+  var billTotalElement = document.querySelector(".billTotal");
+  var errorString = document.querySelector(".error")
+  var billStringElement = document.querySelector(".billString");
 
-var calculateBtnElement = document.querySelector(".calculateBtn");
-//get a reference to the billTotal element
-var billTotalElement = document.querySelector(".billTotal");
-var errorString = document.querySelector(".error")
-//get a reference to the billString
-var billStringElement = document.querySelector(".billString");
-console.log(billTotalElement)
-
-
-calculateBtnElement.addEventListener('click', function(){
+  calculateBtnElement.addEventListener('click', function(){
   var billString = billStringElement.value;
+  //calling back the calculateBill function from the logic
   var returnBillString = calculateBill(billString)
+  
   billTotalElement.innerHTML = returnBillString;
 
    if(returnBillString > 20 && returnBillString < 30){
-     billTotalElement.classList.toggle("warning");
+     billTotalElement.classList.add("warning");
    }else if (returnBillString > 30){
-    billTotalElement.classList.toggle("danger");
+    billTotalElement.classList.add("danger");
   }
   if (returnBillString < 30) {
     billTotalElement.classList.remove("danger");
+    }
 
-  }
   if(returnBillString < 20){
       billTotalElement.classList.remove("warning");
       }
