@@ -10,8 +10,8 @@ function TextBillTotalFactory(){
         smsTotal=smsTotal + 0.75;
       }
 
-      totalBill  = callsTotal + smsTotal;
     }
+
 
   function returnCall() {
     return callsTotal.toFixed(2);;
@@ -20,7 +20,9 @@ function TextBillTotalFactory(){
   function returnSms(){
     return smsTotal.toFixed(2);
   }
+
   function returnTotal(){
+      totalBill  = callsTotal + smsTotal;
       return totalBill.toFixed(2);
   }
     return {
@@ -28,7 +30,7 @@ function TextBillTotalFactory(){
       smsCost     :returnSms,
       totalCost   :totalBill,
       billTotal   :textbillTotal,
-      grandTotal :returnTotal
+      grandTotal  :returnTotal
 
       }
 }

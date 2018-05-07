@@ -7,20 +7,27 @@ document.addEventListener('DOMContentLoaded', function() {
   var smsTotalElem	 = document.querySelector(".smsTotalOne");
   var totalCostElem	 = document.querySelector(".totalOne");
   //update the totals that is displayed on the screen.
-  var billTextTotal  =  TextBillTotalFactory();
-  var totalCosts = billTextTotal.grandTotal();
-addToBillBtn.addEventListener("click" , function() {
-  var billString = billStringElement.value;
+  var textBillTotalFactory  =  TextBillTotalFactory();
 
-  callsTotalElem.innerHTML = billTextTotal.callCost();
-  smsTotalElem.innerHTML = billTextTotal.smsCost();
+
+  addToBillBtn.addEventListener("click" , function() {
+    var billString = billTypeText.value;
+    var totalGrand = textBillTotalFactory.billTotal(billString);
+    var call = textBillTotalFactory.callCost();
+    var sms  = textBillTotalFactory.smsCost();
+    console.log(call)
+  var totalCosts = textBillTotalFactory.grandTotal();
+    console.log(totalCosts)
+
+  callsTotalElem.innerHTML = call;
+  smsTotalElem.innerHTML = sms;
   totalCostElem.innerHTML = totalCosts;
-  if (totalCost >= 50){
+  if (totalCosts >= 50){
       // adding the danger class will make the text red
       totalCostElem.classList.add("danger");
   }
-  else if (totalCost >= 30){
+  else if (totalCosts >= 30){
       totalCostElem.classList.add("warning");
   }
-})
+  })
 });

@@ -1,47 +1,28 @@
-// get a reference to the sms or call radio buttons
-var billItemTypeRadio = document.querySelector(".billItemTypeRadio");
-//get a reference to the add button
-var radioBillAddBtn	 = document.querySelector(".radioBillAddBtn	");
-//create a variable that will keep track of the total bill
-var callTotalTwo = document.querySelector(".callTotalTwo");
-var smsTotalTwo = document.querySelector(".smsTotalTwo");
-var totalTwo = document.querySelector(".totalTwo");
-//add an event listener for when the add button is pressed
-var callTotals = 0;
-var smsTotals = 0;
-//add an event listener for when the add button is pressed
-function radioBillTotal(){
-  var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
-    if (checkedRadioBtn){
-  var billItemType = checkedRadioBtn.value
-  // billItemType will be 'call' or 'sms'
-}
-    // get the value entered in the billType textfield
-    // var billTypeEntered = billTypeText.value.trim();
-    console.log(billItemType);
-    // update the correct total
-    if (billItemType === "call"){
-        callTotals += 2.75
-    }
-    else if (billItemType === "sms"){
-        smsTotals += 0.75;
-    }
+describe("The radio button bill function", function(){
 
+  it("should be able to give the cost of the call.", function(){
+    var radioButtonBill = RadioButtonBill();
+    radioButtonBill.radioFunc("call");
 
-    //update the totals that is displayed on the screen.
-    callTotalTwo.innerHTML = callTotals.toFixed(2);
-    smsTotalTwo.innerHTML = smsTotals.toFixed(2);
-    var totalTwoCost = callTotals + smsTotals;
-    totalTwo.innerHTML = totalTwoCost.toFixed(2);
+    assert.equal(2.75, radioButtonBill.calls());
 
-    if (totalTwoCost >= 50){
-        // adding the danger class will make the text red
-        totalTwo.classList.add("danger");
-    }else if (totalTwoCost >= 30){
-        totalTwo.classList.add("warning");
-    }
+      });
+      it("should be able to give the price of the sms.", function(){
+        var radioBill = RadioButtonBill();
+        radioBill.radioFunc("sms");
+        // textbill1.billTotal("data");
+        assert.equal(0, radioBill.calls());
+        assert.equal(0.75, radioBill.smses());
 
+      });
+      it("should be able to give the sum of calls and sms bill.", function(){
+        var radiobill2 = RadioButtonBill();
+        radiobill2.radioFunc("sms");
+        radiobill2.radioFunc("call");
+        radiobill2.radioFunc("call");
 
-}
+        assert.equal(radiobill2.actualTotal(), 6.25);
 
-radioBillAddBtn.addEventListener('click', radioBillTotal);
+      });
+
+})
